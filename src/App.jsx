@@ -1,24 +1,22 @@
 import React from 'react'
-import Header from './components/header/Header'
-import Nav from './components/nav/Nav'
-import About from './components/about/About'
-import Experience from './components/experience/Experience'
-import Myprojects from './components/myprojects/Myprojects'
-import Contacts from './components/contacts/Contacts'
-import Footer from './components/footer/Footer'
+import Component from './component'
+import Blogs from './components/blog/Blogs'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 const App = () => {
   return (
-    
-    <>
-        <Header/>
-        <Nav/>
-        <About/>
-        <Experience/>
-        <Myprojects/>
-        <Contacts/>
-        <Footer/>
 
+    <>
+      
+      
+    <BrowserRouter>
+    <Routes>
+      <Route index element={<Component/>} />
+      <Route path='/blogs' element={<Blogs/>} />
+      <Route path='/blogs/krishanmaan' element={<Blogs/>} />
+      <Route path='*' element={<Component/>} />
+    </Routes>
+    </BrowserRouter>
     </>
   )
 }

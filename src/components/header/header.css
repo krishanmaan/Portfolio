@@ -16,7 +16,7 @@ header{
 
 .cta{
 
-    margin-top: 2.5rem;  /*to push buttons littlebit down*/
+    margin-top: 2.5rem; 
     display: flex;
     gap: 1.2rem;
     justify-content: center;

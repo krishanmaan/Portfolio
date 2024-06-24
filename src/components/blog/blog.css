@@ -1,0 +1,19 @@
+
+.post{
+    margin: 0 20px;
+    background: black;
+}
+
+.time{
+    margin: 15px 0 30px 10px;
+}
+.post h1{
+    font-size: 40px;
+    font-weight: 1000;
+    margin-bottom: 80px;
+}
+
+.dis{
+    margin: 20px 0 30px 10px;
+    font-size: 25px;
+}

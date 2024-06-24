@@ -13,6 +13,7 @@ const Footer = () => {
             <li><a href="#about">About</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#myprojects">My Projects</a></li>
+            <li><a href="blogs">Blogs</a></li>
         </ul>
 
         <div className="footer__socials">

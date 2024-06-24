@@ -1,67 +1,48 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './myprojects.css'
-import IMG1 from '../../assets/img5.jpg'
-import IMG2 from '../../assets/img2.png'
-import IMG3 from '../../assets/img3.png'
-import IMG4 from '../../assets/img4.png'
+import { txtDB } from '../../firebase';
+import { collection, getDocs } from "firebase/firestore";
 
 const Myprojects = () => {
+  const [data, setData] = useState([])
+
+  const getData = async () => {
+    const valRef = collection(txtDB, 'projectData')
+    const dataDb = await getDocs(valRef)
+    const allData = dataDb.docs.map(val => ({ ...val.data(), id: val.id }))
+    setData(allData)
+    console.log(dataDb)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
-    <section id='myprojects'>
+    <>
+      <section id='myprojects'>
+        <h5>My Recent Works</h5>
+        <h2>Projects</h2>
+        <div className="container portfolio__container">
 
-      <h5>My Recent Works</h5>
-      <h2>Projects</h2>
-
-      <div className="container portfolio__container">
-
-        <article className='portfolio__item'>
-            <div className="portfolio__item-image">
-                <img src={IMG1} alt="" />
-            </div>
-            <h3>Fashion Gallery</h3>
-            <small className='text-light'>Spring Boot | ReactJs | MySQL</small>
-            <div className="portfolio__item-cta">
-              <a href="https://github.com/himani413/FashionGallery" target="_blank" rel='noreferrer' className='btn'>Github</a>
-            </div>
-              
-        </article>
-        <article className='portfolio__item'>
-            <div className="portfolio__item-image">
-                <img src={IMG2} alt="" />
-            </div>
-            <h3>Beauty Garden</h3>
-            <small className='text-light'>HTML | CSS | JS | php | MySQL</small>
-            <div className="portfolio__item-cta">
-              <a href="https://github.com/Thakshila-Bandara/Beauty-Garden" target="_blank" rel='noreferrer' className='btn'>Github</a>  
-            </div>
-            
-        </article>
-        <article className='portfolio__item'>
-            <div className="portfolio__item-image">
-                <img src={IMG4} alt="" />
-            </div>
-            <h3>My Portfolio(This website)</h3>
-            <small className='text-light'>ReactJs</small>
-            <div className="portfolio__item-cta">
-              <a href="https://github.com/Thakshila-Bandara/my-portfolio" target="_blank" rel='noreferrer' className='btn'>Github</a>
-              <a href="https://thakshila-bandara.github.io/my-portfolio/" target="_blank" rel='noreferrer' className='btn btn-primary'>Visit Website</a>  
-            </div>
-            
-        </article>
-        <article className='portfolio__item'>
-            <div className="portfolio__item-image">
-                <img src={IMG2} alt="" />
-            </div>
-            <h3>Khatu Shyamji Seva</h3>
-            <small className='text-light'>Reac | CSS | JS | Bootstrap</small>
-            <div className="portfolio__item-cta">
-              {/* <a href="https://github.com/Thakshila-Bandara/my-resume" target="_blank" rel='noreferrer' className='btn'>Github</a> */}
-              <a href="https://665855dfcf4d19e9de63f1a2--fastidious-banoffee-615697.netlify.app/" target="_blank" rel='noreferrer' className='btn btn-primary'>Visit Website</a>  
-            </div>
-            
-        </article>
-      </div>
-    </section>
+          {
+            data.map(value =>
+              <article className='portfolio__item'>
+                <div className="portfolio__item-image">
+                  <img src={value.imgUrl} alt="" />
+                </div>
+                <h3>{value.titleVal}</h3>
+                <small className='text-light'>{value.techVal}</small>
+                <div className="portfolio__item-cta">
+                  <a href={value.gitVal} target="_blank" rel='noreferrer' className='btn'>Github</a>
+                  <a href={value.liveVal} target="_blank" rel='noreferrer' className='btn btn-primary'>Visit Website</a>
+                </div>
+              </article>
+            )
+          }
+        </div>
+      </section>
+    </>
   )
 }
 

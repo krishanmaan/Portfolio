@@ -22,9 +22,9 @@ const Contacts = () => {
       })
       .then(
         () => {
-          
-          alert('SUCCESS!');
-          const formData ={
+
+          alert('Thank you. I will get back to you as soon as possible.');
+          const formData = {
             name: nameRef.current.value,
             email: emailRef.current.value,
             message: messageRef.current.value,
@@ -33,12 +33,13 @@ const Contacts = () => {
           nameRef.current.value = '';
           emailRef.current.value = '';
           messageRef.current.value = '';
-          
+
         },
         (error) => {
-          alert("Feld");
+          alert("Ahh, something went wrong. Please try again.");
         },
-      );
+      )
+      ;
   };
 
 
@@ -64,8 +65,8 @@ const Contacts = () => {
 
         <form ref={form} onSubmit={sendEmail} >
 
-          <input type="text" name="from_name" placeholder="Your Full Name" required ref={nameRef}/>  {/* client side validation */}
-          <input type="email" name='from_email' placeholder='Your Email' required  ref={emailRef}/>
+          <input type="text" name="from_name" placeholder="Your Full Name" required ref={nameRef} />  {/* client side validation */}
+          <input type="email" name='from_email' placeholder='Your Email' required ref={emailRef} />
           <textarea name="message" rows="7" placeholder='Your Message' required ref={messageRef} ></textarea>
           <button type="submit" value="send" className='btn btn-primary'>Send Message</button>
         </form>
